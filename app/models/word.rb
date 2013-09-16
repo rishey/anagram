@@ -1,21 +1,25 @@
 class Word < ActiveRecord::Base
-  def canonical(word)
-  word.downcase.split('').sort
+  
+ 
+def self.anagrams_for(word)
+
+  @source_word = word
+  @sorted_source_word = word.chomp.downcase.split('').sort.join
+  Word.select(:word).find_all_by_sorted_word(@sorted_source_word)
 end
- 
- 
-def is_anagram?(word1, word2)
-  canonical(word1) == canonical(word2)
-end
- 
- 
-def anagrams_for(word, dictionary)
-  ana_array = []
-  dictionary.each do |dictionary_word|
-    if canonical(dictionary_word) == canonical(word)
-      ana_array.push(dictionary_word)
-    end
-  end
-  ana_array
-end
+
+
+#   dictionary.each do |dictionary_word|
+#     if canonical(dictionary_word) == canonical(word)
+#       ana_array.push(dictionary_word)
+#     end
+#   end
+#   ana_array
+# end
+
+
+
+
+
+
 end
