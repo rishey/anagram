@@ -4,5 +4,11 @@ get '/' do
 end
 
 get '/:word' do
- p "Show a list of anagrams for \"#{params[:word]}\""
+  @words=[]
+  @original_word = params[:word]
+  @words = Word.anagrams_for(params[:word])
+  # words.each do |word|
+  #   @words << word.word
+  # end
+  erb :index
 end
